@@ -1,52 +1,71 @@
 const { User } = require("../models");
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require("../utils/auth");
+const AuthService = require("../utils/auth");
 
 const resolvers = {
     Query: {
         //get all users
-        User: async () => {
+        getUser: async () => {
             return User.find();
         },
         //get user by id
-        User: async (parent, { userId }) => {
+        getUserbyId: async ({ userId }) => {
             return User.findOne({ _id: userId });
         },
         //get all movies
-        Movie: async () => {
+        getMovie: async () => {
             return Movie.find();
         },
         //get movie by id
-        Movie: async (parent, { userId }) => {
+        getMoviebyId: async ({ userId }) => {
             return Movie.findOne({ _id: userId });
         },
 
         Mutation: {
             //addUser mutation
-            addUser: async (parent, { name }) => {
-              return User.create({ name });
+            addUser: async ({ name }) => {
+                return User.create({ name });
             },
             //addMovie(To User) mutation
-            addMovie: async (parent, { userId, Movie }) => {
-              return User.findOneAndUpdate(
-                { _id: userId },
-                {
-                  $addToSet: { savedMovies: Movie },
-                },
-                {
-                  new: true,
-                  runValidators: true,
-                }
-              );
+            addMovie: async ({ userId, Movie }) => {
+                return User.findOneAndUpdate(
+                    { _id: userId },
+                    {
+                        $addToSet: { savedMovies: Movie },
+                    },
+                    {
+                        new: true,
+                        runValidators: true,
+                    }
+                );
             },
             //removeMovie(From user) mutation
-            removeMovie: async (parent, { userId, Movie }) => {
-              return Profile.findOneAndUpdate(
-                { _id: profileId },
-                { $pull: { savedMovies: Movie } },
-                { new: true }
-              );
+            removeMovie: async ({ userId, Movie }) => {
+                return User.findOneAndUpdate(
+                    { _id: userId },
+                    { $pull: { savedMovies: Movie } },
+                    { new: true }
+                );
             },
-          },
+            login: async ({ email, password }) => {
+                const user = await User.findOne({ email });
+
+                if (!user) {
+                    throw new AuthenticationError('No profile with this email found!');
+                }
+
+                const correctPw = await user.isCorrectPassword(password);
+
+                if (!correctPw) {
+                    throw new AuthenticationError('Incorrect password!');
+                }
+
+                const token = signToken(profile);
+                return { token, profile };
+            },
         },
-    }
+    },
+}
 
-
+module.exports = resolvers;
