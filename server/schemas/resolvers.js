@@ -37,10 +37,6 @@ const resolvers = {
                 }
               );
             },
-            //removeUser mutation
-            removeUser: async (parent, { userId }) => {
-              return User.findOneAndDelete({ _id: userId });
-            },
             //removeMovie(From user) mutation
             removeMovie: async (parent, { userId, Movie }) => {
               return Profile.findOneAndUpdate(
