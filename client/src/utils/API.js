@@ -28,8 +28,8 @@ export const loginUser = (userData) => {
   });
 };
 
-// save book data for a logged in user
-export const savedMovies = (movieData, token) => {
+// save movie data for a logged in user
+export const saveMovie = (movieData, token) => {
   return fetch('/api/users', {
     method: 'PUT',
     headers: {
@@ -40,7 +40,7 @@ export const savedMovies = (movieData, token) => {
   });
 };
 
-// remove saved book data for a logged in user
+// remove saved movie data for a logged in user
 export const deleteMovie = (movieId, token) => {
   return fetch(`/api/users/movies/${movieId}`, {
     method: 'DELETE',
@@ -50,13 +50,16 @@ export const deleteMovie = (movieId, token) => {
   });
 };
 
-const url = 'https://online-movie-database.p.rapidapi.com/auto-complete?q=game%20';
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '4aba6eaba8msh77fce36ea9710a3p122391jsn96c80b6aff8e',
-		'X-RapidAPI-Host': 'online-movie-database.p.rapidapi.com'
-	}
+// make a search to movies api
+export const SearchMovies = (query) => {
+  const url = `https://moviesdatabase.p.rapidapi.com/titles/search/${query}/%7Btitle%7D?exact=true&titleType=movie`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': 'cd371396bemsh09be992d64b9d29p136af1jsn69b49ada2570',
+      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
+    }
+  }
 };
 
 try {
