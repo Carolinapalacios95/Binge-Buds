@@ -1,30 +1,30 @@
-export const getSavedBookIds = () => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const getSavedMovieIds = () => {
+  const savedMovieIds = localStorage.getItem('saved_movies')
+    ? JSON.parse(localStorage.getItem('saved_movies'))
     : [];
 
-  return savedBookIds;
+  return savedMovieIds;
 };
 
-export const saveBookIds = (bookIdArr) => {
-  if (bookIdArr.length) {
-    localStorage.setItem('saved_books', JSON.stringify(bookIdArr));
+export const saveMovieIds = (movieIdArr) => {
+  if (movieIdArr.length) {
+    localStorage.setItem('saved_movies', JSON.stringify(movieIdArr));
   } else {
-    localStorage.removeItem('saved_books');
+    localStorage.removeItem('saved_movies');
   }
 };
 
-export const removeBookId = (bookId) => {
-  const savedBookIds = localStorage.getItem('saved_books')
-    ? JSON.parse(localStorage.getItem('saved_books'))
+export const removeMovieId = (movieId) => {
+  const savedMovieIds = localStorage.getItem('saved_movies')
+    ? JSON.parse(localStorage.getItem('saved_movies'))
     : null;
 
-  if (!savedBookIds) {
+  if (!savedMovieIds) {
     return false;
   }
 
-  const updatedSavedBookIds = savedBookIds?.filter((savedBookId) => savedBookId !== bookId);
-  localStorage.setItem('saved_books', JSON.stringify(updatedSavedBookIds));
+  const updatedSavedMovieIds = savedMovieIds?.filter((savedMovieId) => savedMovieId !== movieId);
+  localStorage.setItem('saved_movies', JSON.stringify(updatedSavedMovieIds));
 
   return true;
 };
