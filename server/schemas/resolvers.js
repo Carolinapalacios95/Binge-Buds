@@ -1,4 +1,7 @@
 const { User } = require("../models");
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require("../utils/auth");
+const AuthService = require("../utils/auth");
 
 const resolvers = {
     Query: {
@@ -7,25 +10,25 @@ const resolvers = {
             return User.find();
         },
         //get user by id
-        getUserbyId: async (parent, { userId }) => {
+        getUserbyId: async ({ userId }) => {
             return User.findOne({ _id: userId });
         },
         //get all movies
-        Movie: async () => {
+        getMovie: async () => {
             return Movie.find();
         },
         //get movie by id
-        Movie: async (parent, { userId }) => {
+        getMoviebyId: async ({ userId }) => {
             return Movie.findOne({ _id: userId });
         },
 
         Mutation: {
             //addUser mutation
-            addUser: async (parent, { name }) => {
+            addUser: async ({ name }) => {
                 return User.create({ name });
             },
             //addMovie(To User) mutation
-            addMovie: async (parent, { userId, Movie }) => {
+            addMovie: async ({ userId, Movie }) => {
                 return User.findOneAndUpdate(
                     { _id: userId },
                     {
@@ -38,14 +41,14 @@ const resolvers = {
                 );
             },
             //removeMovie(From user) mutation
-            removeMovie: async (parent, { userId, Movie }) => {
-                return Profile.findOneAndUpdate(
-                    { _id: profileId },
+            removeMovie: async ({ userId, Movie }) => {
+                return User.findOneAndUpdate(
+                    { _id: userId },
                     { $pull: { savedMovies: Movie } },
                     { new: true }
                 );
             },
-            login: async (parent, { email, password }) => {
+            login: async ({ email, password }) => {
                 const user = await User.findOne({ email });
 
                 if (!user) {
@@ -65,4 +68,4 @@ const resolvers = {
     },
 }
 
-
+module.exports = resolvers;
