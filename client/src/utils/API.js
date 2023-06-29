@@ -51,7 +51,7 @@ export const deleteMovie = (movieId, token) => {
 };
 
 // make a search to movies api
-export const SearchMovies = (query) => {
+export const searchMovies = (query) => {
   const url = `https://moviesdatabase.p.rapidapi.com/titles/search/${query}/%7Btitle%7D?exact=true&titleType=movie`;
   const options = {
     method: 'GET',
