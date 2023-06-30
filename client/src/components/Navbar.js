@@ -20,6 +20,7 @@ const AppNavbar = () => {
               alt="Binge Buds logo"
               style={{ height: '100px', width: '100px' }}
             />
+
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
@@ -27,11 +28,11 @@ const AppNavbar = () => {
               <Nav.Link as={Link} to='/'>
                 Search For Movies
               </Nav.Link>
-              {/* if user is logged in show saved books and logout */}
+              {/* if user is logged in show saved movies and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
-                    See Your Books
+                    See Your Movies
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
