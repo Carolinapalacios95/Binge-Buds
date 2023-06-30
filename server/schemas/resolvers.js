@@ -1,52 +1,61 @@
 const { User } = require("../models");
+const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require("../utils/auth");
+const AuthService = require("../utils/auth");
 
 const resolvers = {
     Query: {
-        //get all users
-        User: async () => {
-            return User.find();
-        },
-        //get user by id
-        User: async (parent, { userId }) => {
-            return User.findOne({ _id: userId });
-        },
-        //get all movies
-        Movie: async () => {
-            return Movie.find();
-        },
-        //get movie by id
-        Movie: async (parent, { userId }) => {
-            return Movie.findOne({ _id: userId });
-        },
-
-        Mutation: {
-            //addUser mutation
-            addUser: async (parent, { name }) => {
-              return User.create({ name });
-            },
-            //addMovie(To User) mutation
-            addMovie: async (parent, { userId, Movie }) => {
-              return User.findOneAndUpdate(
-                { _id: userId },
-                {
-                  $addToSet: { savedMovies: Movie },
-                },
-                {
-                  new: true,
-                  runValidators: true,
-                }
-              );
-            },
-            //removeMovie(From user) mutation
-            removeMovie: async (parent, { userId, Movie }) => {
-              return Profile.findOneAndUpdate(
-                { _id: profileId },
-                { $pull: { savedMovies: Movie } },
-                { new: true }
-              );
-            },
+        me: async (parent, args, context) => {
+            if (context.user) {
+              return User.findOne({ _id: context.user._id });
+            }
+            throw new AuthenticationError('You need to be logged in!');
           },
         },
-    }
+        Mutation: {
+          addUser: async (parent, { username, email, password }) => {
+            const user = await User.create({ username, email, password });
+            const token = signToken(user);
+            return { token, user };
+          },
+          login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+      
+            if (!user) {
+              throw new AuthenticationError('No user found with this email address');
+            }
+      
+            const correctPw = await user.isCorrectPassword(password);
+      
+            if (!correctPw) {
+              throw new AuthenticationError('Incorrect credentials');
+            }
+      
+            const token = signToken(user);
+      
+            return { token, user };
+          },
+          saveMovie: async (parent, { input }, context) => {
+            if (context.user) {
+              return User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $addToSet: { savedMovies: input } },
+                { new: true}
+              );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+          },
+          removeMovie: async (parent, { MovieId }, context) => {
+            if (context.user) {
+              return User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { savedMovies: { movieId: movieId }} },
+                { new: true}
+              );
+            }
+            throw new AuthenticationError('You need to be logged in!');
+          },
+        },
+      };
 
-
+module.exports = resolvers;
