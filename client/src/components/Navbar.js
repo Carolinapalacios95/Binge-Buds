@@ -15,7 +15,12 @@ const AppNavbar = () => {
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            Movie Search
+            <img
+              src="../bingebudslogo.png"
+              alt="Binge Buds logo"
+              style={{ height: '100px', width: '100px' }}
+            />
+
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
