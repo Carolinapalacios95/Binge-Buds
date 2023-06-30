@@ -1,7 +1,7 @@
 const { User } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
-const AuthService = require("../utils/auth");
+
 
 const resolvers = {
     Query: {
@@ -45,7 +45,7 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
-          removeMovie: async (parent, { MovieId }, context) => {
+          removeMovie: async (parent, { movieId }, context) => {
             if (context.user) {
               return User.findOneAndUpdate(
                 { _id: context.user._id },
