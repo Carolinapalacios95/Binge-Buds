@@ -16,8 +16,9 @@ const AppNavbar = () => {
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
             <img
-              src=""
+              src="../bingebudslogo.png"
               alt="Binge Buds logo"
+              style={{ height: '100px', width: '100px' }}
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
