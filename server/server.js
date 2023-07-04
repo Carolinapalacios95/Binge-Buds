@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const http = require('http');
 const db = require('./config/connection');
 const { authMiddleware } = require('./utils/auth');
 
@@ -8,6 +9,8 @@ const { ApolloServer } = require('apollo-server-express');
 
 // Import the two parts of a GraphQL schema
 const { typeDefs, resolvers } = require('./schemas');
+
+const socketIO = require('socket.io');
 
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
@@ -20,6 +23,8 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const httpServer = http.createServer(app);
+const io = socketIO(httpServer);
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
@@ -28,6 +33,10 @@ if (process.env.NODE_ENV === 'production') {
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+io.on('connection', (socket) => {
+  console.log('A user connected');
 });
 
 // Create a new instance of an Apollo server with the GraphQL schema
