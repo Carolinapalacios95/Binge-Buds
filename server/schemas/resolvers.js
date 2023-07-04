@@ -67,17 +67,15 @@ const resolvers = {
               return updatedUser;
             }
           },
-          removeMovie: {
-            async __resolve(parent, { movieId }, context) {
-              if (context.user) {
-                return User.findOneAndUpdate(
-                  { _id: context.user._id },
-                  { $pull: { savedMovies: { movieId } } },
-                  { new: true }
-                );
-              }
-              throw new AuthenticationError('You need to be logged in!');
+          removeMovie: async (parent, { movieId }, context) => {
+            if (context.user) {
+              return User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { savedMovies: { movieId } } },
+                { new: true }
+              );
             }
+            throw new AuthenticationError('You need to be logged in!');
           },
         };
     
