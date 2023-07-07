@@ -51,20 +51,6 @@ export const deleteMovie = (movieId, token) => {
 };
 
 // make a search to movies api
-export const searchMovies = (query) => {
-  const url = `https://moviesdatabase.p.rapidapi.com/titles/search/${query}/%7Btitle%7D?exact=true&titleType=movie`;
-  const options = {
-    method: 'GET',
-    headers: {
-      'X-RapidAPI-Key': 'cd371396bemsh09be992d64b9d29p136af1jsn69b49ada2570',
-      'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
-    }
-  }
+export const searchMoviesApi = ( query ) => {
+    return fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=055838ecd4febbb273484a0d5fdf8800`)
 };
-//   try {
-//     const response = await fetch(url, options);
-//     const result = await response.text();
-//     console.log(result);
-//   } catch (error) {
-//     console.error(error);
-//   }

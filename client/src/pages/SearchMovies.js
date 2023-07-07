@@ -9,7 +9,7 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveMovie, searchMovies } from '../utils/API';
+import { saveMovie, searchMoviesApi } from '../utils/API';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
 const SearchMovies = () => {
@@ -36,19 +36,21 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await searchMovies(searchInput);
+      const response = await searchMoviesApi(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const items  = await response.json();
+      console.log(items.results)
+      
 
-      const movieData = items.map((movie) => ({
+      const movieData = items.results.map((movie) => ({
         movieId: movie.id,
-        title: movie.volumeInfo.title,
-        description: movie.volumeInfo.description,
-        image: movie.volumeInfo.imageLinks?.thumbnail || '',
+        title: movie.original_title,
+        description: movie.overview,
+        image: movie.poster_path || '',
       }));
 
       setSearchedMovies(movieData);
@@ -127,7 +129,7 @@ const SearchMovies = () => {
                   ) : null}
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
-                    <p className='small'>Authors: {movie.authors}</p>
+                    <p className='small'>Overview: </p>
                     <Card.Text>{movie.description}</Card.Text>
                     {Auth.loggedIn() && (
                       <Button
