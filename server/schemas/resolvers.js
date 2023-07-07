@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User , BingeBud } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
 
@@ -37,25 +37,44 @@ const resolvers = {
           },
           saveMovie: async (parent, { input }, context) => {
             if (context.user) {
-              return User.findOneAndUpdate(
+              const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { savedMovies: input } },
                 { new: true}
               );
+            };
+              
+              const otherUsers = await User.find({
+                _id: { $ne: context.user._id},
+                savedMovies: { movieId: input.movieId }
+              });
+
+              for (const user of otherUsers) {
+                const bingeBud = new BingeBud({
+                  user: context.user._id,
+                  username: context.user.username,
+                  email: context.user.email,
+                  movie: input.movieId,
+                });
+
+                await bingeBud.save();
+                
+              }
+       
+              return updatedUser;
             }
-            throw new AuthenticationError('You need to be logged in!');
           },
           removeMovie: async (parent, { movieId }, context) => {
             if (context.user) {
               return User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedMovies: { movieId: movieId }} },
-                { new: true}
+                { $pull: { savedMovies: { movieId } } },
+                { new: true }
               );
             }
             throw new AuthenticationError('You need to be logged in!');
           },
-        },
-      };
+        };
+    
 
 module.exports = resolvers;
