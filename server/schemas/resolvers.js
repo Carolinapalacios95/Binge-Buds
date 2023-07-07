@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User , BingeBud } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
 
@@ -50,18 +50,15 @@ const resolvers = {
               });
 
               for (const user of otherUsers) {
-                const notification = new Notification({
+                const bingeBud = new BingeBud({
                   user: context.user._id,
+                  username: context.user.username,
                   email: context.user.email,
                   movie: input.movieId,
-                  recipient: user._id,
-                  // Add any other relevant notification data
                 });
-                await notification.save();
-               
-                // Emit real-time event to notify the recipient user
-                // Example using Socket.IO
-                io.emit(`notification:${user._id}`, notification);
+
+                await bingeBud.save();
+                
               }
        
               return updatedUser;
