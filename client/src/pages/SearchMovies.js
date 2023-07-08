@@ -9,7 +9,9 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveMovie, searchMoviesApi } from '../utils/API';
+import { useMutation } from '@apollo/client';
+import { SAVE_MOVIE } from '../utils/mutations';
+import { searchMoviesApi } from '../utils/API';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
 const SearchMovies = () => {
@@ -21,6 +23,7 @@ const SearchMovies = () => {
   // create state to hold saved movieId values
   const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
 
+  const [saveMovie, {error, data}] = useMutation(SAVE_MOVIE);
   // set up useEffect hook to save `savedMovieIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -47,7 +50,7 @@ const SearchMovies = () => {
       
 
       const movieData = items.results.map((movie) => ({
-        movieId: movie.id,
+        movieId: movie.id.toString(),
         title: movie.original_title,
         description: movie.overview,
         image: movie.poster_path || '',
@@ -73,14 +76,12 @@ const SearchMovies = () => {
     }
 
     try {
-      const response = await saveMovie(movieToSave, token);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      const { data } = await saveMovie({
+        variables: { input: movieToSave, token}
+      });
 
       // if movie successfully saves to user's account, save movie id to state
-      setSavedMovieIds([...savedMovieIds, movieToSave.movieId]);
+      setSavedMovieIds(data.saveMovie.savedMovies.map(x => x.movieId));
     } catch (err) {
       console.error(err);
     }
