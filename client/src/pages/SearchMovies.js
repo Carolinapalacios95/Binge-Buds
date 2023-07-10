@@ -126,7 +126,7 @@ const SearchMovies = () => {
               <Col md="4">
                 <Card key={movie.movieId} border='dark'>
                   {movie.image ? (
-                    <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' />
+                    <Card.Img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={`The cover for ${movie.title}`} variant='top' />
                   ) : null}
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
