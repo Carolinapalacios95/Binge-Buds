@@ -52,5 +52,5 @@ export const deleteMovie = (movieId, token) => {
 
 // make a search to movies api
 export const searchMoviesApi = ( query ) => {
-    return fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=055838ecd4febbb273484a0d5fdf8800`)
+    return fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${process.env.API_KEY}`)
 };
