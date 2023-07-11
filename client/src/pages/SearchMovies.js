@@ -8,6 +8,7 @@ import {
   Row
 } from 'react-bootstrap';
 
+import {SearchList} from "../components/SearchList";
 import Auth from '../utils/auth';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { SAVE_MOVIE } from '../utils/mutations';
