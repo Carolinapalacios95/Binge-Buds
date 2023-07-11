@@ -106,7 +106,13 @@ const SearchMovies = () => {
 
   return (
     <>
-      <div className='text-light bg-dark pt-5'>
+      <br></br>
+      <img className="style-logo"
+        src="./public/images/bblogo.png"
+        alt="Binge Buds logo"
+
+      />
+      <div className="color-search">
         <Container>
           <h1>Search for Movies!</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -122,7 +128,7 @@ const SearchMovies = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' className="color-searchbutton" variant='success' size='lg'>
                   Submit Search
                 </Button>
               </Col>
