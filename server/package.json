@@ -7,6 +7,9 @@
         "start": "node server.js",
         "seed": "node seeds/seed.js",
         "watch": "nodemon server.js"
+        "start": "node server.js",
+        "seed": "node seeds/seed.js",
+        "watch": "nodemon server.js"
     },
     "keywords": [],
     "author": "",
@@ -21,6 +24,10 @@
         "node-fetch": "^3.3.1"
     },
     "devDependencies": {
+        "nodemon": "^2.0.3"
+    }
+}
+
         "nodemon": "^2.0.3"
     }
 }
