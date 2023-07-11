@@ -136,7 +136,7 @@ const SearchMovies = () => {
         <h2 className='pt-5'>
           {searchedMovies.length
             ? `Viewing ${searchedMovies.length} results:`
-            : 'Search for a movie to begin'}
+            : ''}
         </h2>
         <Row>
           {searchedMovies.map((movie) => {
