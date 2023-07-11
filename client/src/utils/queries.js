@@ -16,3 +16,17 @@ export const GET_ME = gql`
     }
   }
 `;
+
+export const SEARCH_MOVIE = gql`
+  query searchMovie($query: String!) {
+    searchMovie(query: $query) {
+      results {
+        id
+        original_title
+        overview
+        poster_path
+      }
+    }
+  }
+`;
+

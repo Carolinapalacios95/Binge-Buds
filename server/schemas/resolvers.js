@@ -1,7 +1,10 @@
 const { User } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
-
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+require('dotenv').config();
+const apiKey= process.env.API_KEY;
+console.log("API KEY", apiKey);
 
 const resolvers = {
     Query: {
@@ -11,6 +14,13 @@ const resolvers = {
             }
             throw new AuthenticationError('You need to be logged in!');
           },
+          searchMovie: async (parent, { query }) => {
+            const params = query ? { query } : {};
+            const response = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${apiKey}`);
+            const movies = await response.json();
+            console.log("MOVIES", movies);
+            return movies;
+          }
         },
         Mutation: {
           addUser: async (parent, { username, email, password }) => {
