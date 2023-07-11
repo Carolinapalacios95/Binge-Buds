@@ -16,7 +16,7 @@ const AppNavbar = () => {
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
             <img
-              src="../bingebudslogo.png"
+              src="./public/images/bblogo.png"
               alt="Binge Buds logo"
               style={{ height: '100px', width: '100px' }}
             />
