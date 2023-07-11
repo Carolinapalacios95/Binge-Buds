@@ -24,8 +24,6 @@ const userSchema = new Schema(
     },
     // set savedMovies to be an array of data that adheres to the movieSchema
     savedMovies: [movieSchema],
-
-    bingebuds: [bingeBudSchema],
   },
   // set this to use virtual below
   {

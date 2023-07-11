@@ -1,4 +1,4 @@
-const { User , BingeBud } = require("../models");
+const { User } = require("../models");
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require("../utils/auth");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
@@ -53,24 +53,7 @@ const resolvers = {
                 { new: true}
               );
             };
-              
-              const otherUsers = await User.find({
-                _id: { $ne: context.user._id},
-                savedMovies: { movieId: input.movieId }
-              });
 
-              for (const user of otherUsers) {
-                const bingeBud = new BingeBud({
-                  user: context.user._id,
-                  username: context.user.username,
-                  email: context.user.email,
-                  movie: input.movieId,
-                });
-
-                await bingeBud.save();
-                
-              }
-       
               return updatedUser;
             }
           },
