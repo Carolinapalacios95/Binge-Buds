@@ -12,14 +12,10 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar bg='dark' variant='dark' expand='lg'>
+      <Navbar className="color-nav" variant='light' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-            <img
-              src="../bingebudslogo.png"
-              alt="Binge Buds logo"
-              style={{ height: '100px', width: '100px' }}
-            />
+
 
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />

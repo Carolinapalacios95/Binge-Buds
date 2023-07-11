@@ -1,17 +1,43 @@
-body {
-  font-family: 'Rubik', sans-serif;
+.color-nav {
+  background-color: rgba(167, 170, 8, 0.925);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: 'Rubik Mono One', sans-serif;
+.style-logo {
+  display: flex;
+  flex-direction: column;
 }
 
-.small {
-  font-weight: 300;
-  font-style: italic;
-}
+.color-search {
+
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-transform: uppercase;
+   background-image: linear-gradient(-225deg,
+      #062f6b 0%,
+      #2445b4 29%,
+      #05536b 67%,
+      #fff800 100%); 
+  /* background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+ 
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2s linear infinite;
+  display: inline-block;
+      font-size: 190px;
+} 
+
+  /* @keyframes textclip {
+    to {
+      background-position: 200% center;
+    }
+
+    */
+  } */
+
+  .color-searchbutton {
+    background-color: rgb(28, 69, 184);
+  }
