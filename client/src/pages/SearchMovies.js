@@ -11,7 +11,6 @@ import {
 import Auth from '../utils/auth';
 import { useMutation, useQuery } from '@apollo/client';
 import { SAVE_MOVIE } from '../utils/mutations';
-import { searchMoviesApi } from '../utils/API';
 import { SEARCH_MOVIE } from '../utils/queries';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
@@ -24,8 +23,9 @@ const SearchMovies = () => {
   // create state to hold saved movieId values
   const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
 
-  const [searchMovie, {loading, data: searchMovieData}] = useQuery(SEARCH_MOVIE);
-  
+  // const [searchMovie, {loading, data: searchMovieData}] = useQuery(SEARCH_MOVIE);
+  // const searchMovieResults = useQuery(SEARCH_MOVIE);
+
   const [saveMovie, {error, data: saveMovieData}] = useMutation(SAVE_MOVIE);
   // set up useEffect hook to save `savedMovieIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -41,29 +41,43 @@ const SearchMovies = () => {
       return false;
     }
 
+    
+
     try {
-      const response = await searchMoviesApi(searchInput);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const items  = await response.json();
-      console.log(items.results)
-      
-
-      const movieData = items.results.map((movie) => ({
-        movieId: movie.id.toString(),
-        title: movie.original_title,
-        description: movie.overview,
-        image: movie.poster_path || '',
-      }));
-
-      setSearchedMovies(movieData);
-      setSearchInput('');
-    } catch (err) {
+      const { loading, data } = useQuery(SEARCH_MOVIE, {
+        variables: { query: searchInput }
+      });
+      console.log("SEARCH RESPONSE", data);
+    }
+    catch (err) {
       console.error(err);
     }
+
+    
+
+    // try {
+    //   const response = await searchMoviesApi(searchInput);
+
+    //   if (!response.ok) {
+    //     throw new Error('something went wrong!');
+    //   }
+
+    //   const items  = await response.json();
+    //   console.log(items.results)
+      
+
+    //   const movieData = items.results.map((movie) => ({
+    //     movieId: movie.id.toString(),
+    //     title: movie.original_title,
+    //     description: movie.overview,
+    //     image: movie.poster_path || '',
+    //   }));
+
+    //   setSearchedMovies(movieData);
+    //   setSearchInput('');
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   // create function to handle saving a movie to our database

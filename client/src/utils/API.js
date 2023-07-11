@@ -1,5 +1,3 @@
-const apiKey= process.env.API_KEY;
-
 // route to get logged in user's info (needs the token)
 export const getMe = (token) => {
   return fetch('/api/users/me', {
@@ -50,9 +48,4 @@ export const deleteMovie = (movieId, token) => {
       authorization: `Bearer ${token}`,
     },
   });
-};
-
-// make a search to movies api
-export const searchMoviesApi = ( query ) => {
-    return fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&api_key=${apiKey}`)
 };
