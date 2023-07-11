@@ -7,15 +7,20 @@ import {
   Col
 } from 'react-bootstrap';
 
-import { getMe, deleteMovie} from '../utils/API';
+import { REMOVE_MOVIE } from '../utils/mutations';
+import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import { removeMovieId } from '../utils/localStorage';
+import { useLazyQuery, useMutation } from '@apollo/client';
 
 const SavedMovies = () => {
   const [userData, setUserData] = useState({});
+  const [getMe] = useLazyQuery(GET_ME);
 
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
+
+  const [deleteMovie, {error, data}] = useMutation(REMOVE_MOVIE);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -26,21 +31,16 @@ const SavedMovies = () => {
           return false;
         }
 
-        const response = await getMe(token);
+        const { data } = await getMe({variables: {token}});
 
-        if (!response.ok) {
-          throw new Error('something went wrong!');
-        }
-
-        const user = await response.json();
-        setUserData(user);
+        setUserData(data.me);
       } catch (err) {
         console.error(err);
       }
     };
 
     getUserData();
-  }, [userDataLength]);
+  }, [userDataLength, getMe]);
 
   // create function that accepts the movie's mongo _id value as param and deletes the movie from the database
   const handleDeleteMovie = async (movieId) => {
@@ -51,14 +51,14 @@ const SavedMovies = () => {
     }
 
     try {
-      const response = await deleteMovie(movieId, token);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      const { data } = await deleteMovie({
+        variables: { movieId, token}
+      });
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+
+      console.log({data})
+      setUserData(data.removeMovie);
       // upon success, remove movie's id from localStorage
       removeMovieId(movieId);
     } catch (err) {
@@ -73,7 +73,7 @@ const SavedMovies = () => {
 
   return (
     <>
-      <div fluid className='text-light bg-dark p-5'>
+      <div className='text-light bg-dark p-5'>
         <Container>
           <h1>Viewing saved movies!</h1>
         </Container>
@@ -89,7 +89,7 @@ const SavedMovies = () => {
             return (
               <Col md="4">
                 <Card key={movie.movieId} border='dark'>
-                  {movie.image ? <Card.Img src={movie.image} alt={`The cover for ${movie.title}`} variant='top' /> : null}
+                  {movie.image ? <Card.Img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={`The cover for ${movie.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
                     <p className='small'>Authors: {movie.authors}</p>
