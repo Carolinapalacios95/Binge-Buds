@@ -8,7 +8,6 @@ type User {
   password: String
   movieCount: Int
   savedMovies: [Movie]
-  bingebuds: [BingeBud]
 }
 
 type Movie {
@@ -17,14 +16,6 @@ type Movie {
   title: String
   image: String
 }
-
-type BingeBud {
-  user: User
-  username: String
-  email: String
-  movie: Movie
-}
-
 
 type Auth {
   token: ID!

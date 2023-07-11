@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 
 const movieSchema = require('./Movie');
 
-const bingeBudSchema = require('./BingeBud');
-
 const userSchema = new Schema(
   {
     username: {
@@ -24,8 +22,6 @@ const userSchema = new Schema(
     },
     // set savedMovies to be an array of data that adheres to the movieSchema
     savedMovies: [movieSchema],
-
-    bingebuds: [bingeBudSchema],
   },
   // set this to use virtual below
   {
