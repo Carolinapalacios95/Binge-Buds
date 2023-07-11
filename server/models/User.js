@@ -3,8 +3,6 @@ const bcrypt = require('bcrypt');
 
 const movieSchema = require('./Movie');
 
-const bingeBudSchema = require('./BingeBud');
-
 const userSchema = new Schema(
   {
     username: {
