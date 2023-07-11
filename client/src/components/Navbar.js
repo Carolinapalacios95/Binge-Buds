@@ -15,7 +15,7 @@ const AppNavbar = () => {
       <Navbar className="color-nav" variant='light' expand='lg'>
         <Container fluid>
           <Navbar.Brand as={Link} to='/'>
-
+         
 
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
