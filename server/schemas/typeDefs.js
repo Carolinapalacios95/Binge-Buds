@@ -31,8 +31,20 @@ type Auth {
   user: User
 }
 
+type MovieAPI {
+  results: [MovieResult]
+}
+
+type MovieResult {
+  id: String
+  original_title: String
+  overview: String
+  poster_path: String
+}
+
 type Query {
   me: User
+  searchMovie(query: String!): MovieAPI
 }
 
 input savedMovie {

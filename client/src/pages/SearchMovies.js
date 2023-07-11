@@ -9,9 +9,9 @@ import {
 } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { useMutation } from '@apollo/client';
+import { useMutation, useLazyQuery } from '@apollo/client';
 import { SAVE_MOVIE } from '../utils/mutations';
-import { searchMoviesApi } from '../utils/API';
+import { SEARCH_MOVIE } from '../utils/queries';
 import { saveMovieIds, getSavedMovieIds } from '../utils/localStorage';
 
 const SearchMovies = () => {
@@ -23,7 +23,12 @@ const SearchMovies = () => {
   // create state to hold saved movieId values
   const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
 
-  const [saveMovie, {error, data}] = useMutation(SAVE_MOVIE);
+  const [searchMovie, { loading, data: searchMovieData }] = useLazyQuery(SEARCH_MOVIE, {
+    variables: { query: searchInput }
+  });
+  // const searchMovieResults = useQuery(SEARCH_MOVIE);
+
+  const [saveMovie, { error, data: saveMovieData }] = useMutation(SAVE_MOVIE);
   // set up useEffect hook to save `savedMovieIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -38,29 +43,41 @@ const SearchMovies = () => {
       return false;
     }
 
+
+
     try {
-      const response = await searchMoviesApi(searchInput);
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
-      const items  = await response.json();
-      console.log(items.results)
-      
-
-      const movieData = items.results.map((movie) => ({
-        movieId: movie.id.toString(),
-        title: movie.original_title,
-        description: movie.overview,
-        image: movie.poster_path || '',
-      }));
-
-      setSearchedMovies(movieData);
-      setSearchInput('');
-    } catch (err) {
+      searchMovie();
+      console.log("SEARCH RESPONSE", searchMovieData);
+    }
+    catch (err) {
       console.error(err);
     }
+
+
+
+    // try {
+    //   const response = await searchMoviesApi(searchInput);
+
+    //   if (!response.ok) {
+    //     throw new Error('something went wrong!');
+    //   }
+
+    //   const items  = await response.json();
+    //   console.log(items.results)
+
+
+    //   const movieData = items.results.map((movie) => ({
+    //     movieId: movie.id.toString(),
+    //     title: movie.original_title,
+    //     description: movie.overview,
+    //     image: movie.poster_path || '',
+    //   }));
+
+    //   setSearchedMovies(movieData);
+    //   setSearchInput('');
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   // create function to handle saving a movie to our database
@@ -76,12 +93,12 @@ const SearchMovies = () => {
     }
 
     try {
-      const { data } = await saveMovie({
-        variables: { input: movieToSave, token}
+      const { saveMovieData } = await saveMovie({
+        variables: { input: movieToSave, token }
       });
 
       // if movie successfully saves to user's account, save movie id to state
-      setSavedMovieIds(data.saveMovie.savedMovies.map(x => x.movieId));
+      setSavedMovieIds(saveMovieData.saveMovie.savedMovies.map(x => x.movieId));
     } catch (err) {
       console.error(err);
     }
