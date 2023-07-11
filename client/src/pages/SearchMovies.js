@@ -107,11 +107,6 @@ const SearchMovies = () => {
   return (
     <>
       <br></br>
-      <img className="style-logo"
-        src="./public/images/bblogo.png"
-        alt="Binge Buds logo"
-
-      />
       <div className="color-search">
         <Container>
           <h1>Search for Movies!</h1>
