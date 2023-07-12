@@ -8,7 +8,7 @@ import {
   Row
 } from 'react-bootstrap';
 
-import {SearchList} from "../components/SearchList";
+import SearchList from "../components/SearchList";
 import Auth from '../utils/auth';
 import { useMutation, useLazyQuery } from '@apollo/client';
 import { SAVE_MOVIE } from '../utils/mutations';
@@ -20,6 +20,8 @@ const SearchMovies = () => {
   const [searchedMovies, setSearchedMovies] = useState([]);
   // create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
+
+
 
   // create state to hold saved movieId values
   const [savedMovieIds, setSavedMovieIds] = useState(getSavedMovieIds());
@@ -37,49 +39,28 @@ const SearchMovies = () => {
   });
 
   // create method to search for movies and set state on form submit
-  const handleFormSubmit = async (event) => {
+ const handleFormSubmit = async (event) => {
     event.preventDefault();
-
     if (!searchInput) {
       return false;
     }
-
-
-
     try {
-      searchMovie();
-      console.log("SEARCH RESPONSE", searchMovieData);
+      searchMovie({
+        variables: { query: searchInput }
+      });
+    if (searchMovieData) {
+      setSearchedMovies(searchMovieData.movies || []);
     }
+  }
     catch (err) {
       console.error(err);
     }
-
-
-
-    // try {
-    //   const response = await searchMoviesApi(searchInput);
-
-    //   if (!response.ok) {
-    //     throw new Error('something went wrong!');
-    //   }
-
-    //   const items  = await response.json();
-    //   console.log(items.results)
-
-
-    //   const movieData = items.results.map((movie) => ({
-    //     movieId: movie.id.toString(),
-    //     title: movie.original_title,
-    //     description: movie.overview,
-    //     image: movie.poster_path || '',
-    //   }));
-
-    //   setSearchedMovies(movieData);
-    //   setSearchInput('');
-    // } catch (err) {
-    //   console.error(err);
-    // }
   };
+  useEffect(() => {
+    if (searchMovieData) {
+      console.log("SEARCH RESPONSE", searchMovieData);
+    }
+  }, [searchMovieData]);
 
   // create function to handle saving a movie to our database
   const handleSaveMovie = async (movieId) => {
@@ -130,6 +111,7 @@ const SearchMovies = () => {
               </Col>
             </Row>
           </Form>
+       
         </Container>
       </div>
 
@@ -139,34 +121,12 @@ const SearchMovies = () => {
             ? `Viewing ${searchedMovies.length} results:`
             : ''}
         </h2>
-        <Row>
-          {searchedMovies.map((movie) => {
-            return (
-              <Col md="4">
-                <Card key={movie.movieId} border='dark'>
-                  {movie.image ? (
-                    <Card.Img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={`The cover for ${movie.title}`} variant='top' />
-                  ) : null}
-                  <Card.Body>
-                    <Card.Title>{movie.title}</Card.Title>
-                    <p className='small'>Overview: </p>
-                    <Card.Text>{movie.description}</Card.Text>
-                    {Auth.loggedIn() && (
-                      <Button
-                        disabled={savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)}
-                        className='btn-block btn-info'
-                        onClick={() => handleSaveMovie(movie.movieId)}>
-                        {savedMovieIds?.some((savedMovieId) => savedMovieId === movie.movieId)
-                          ? 'This movie has already been saved!'
-                          : 'Save this Movie!'}
-                      </Button>
-                    )}
-                  </Card.Body>
-                </Card>
-              </Col>
-            );
-          })}
-        </Row>
+ 
+        <SearchList
+            searchMovieData={searchMovieData}
+          >
+            
+          </SearchList>
       </Container>
     </>
   );
