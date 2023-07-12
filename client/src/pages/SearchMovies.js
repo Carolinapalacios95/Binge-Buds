@@ -39,7 +39,7 @@ const SearchMovies = () => {
   });
 
   // create method to search for movies and set state on form submit
- const handleFormSubmit = async (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     if (!searchInput) {
       return false;
@@ -48,10 +48,10 @@ const SearchMovies = () => {
       searchMovie({
         variables: { query: searchInput }
       });
-    if (searchMovieData) {
-      setSearchedMovies(searchMovieData.movies || []);
+      if (searchMovieData) {
+        setSearchedMovies(searchMovieData.movies || []);
+      }
     }
-  }
     catch (err) {
       console.error(err);
     }
@@ -91,6 +91,7 @@ const SearchMovies = () => {
       <br></br>
       <div className="color-search">
         <Container>
+          
           <h1>Search for Movies!</h1>
           <Form onSubmit={handleFormSubmit}>
             <Row>
@@ -111,7 +112,7 @@ const SearchMovies = () => {
               </Col>
             </Row>
           </Form>
-       
+
         </Container>
       </div>
 
@@ -121,13 +122,18 @@ const SearchMovies = () => {
             ? `Viewing ${searchedMovies.length} results:`
             : ''}
         </h2>
- 
+
         <SearchList
-            searchMovieData={searchMovieData}
-          >
-            
-          </SearchList>
+          searchMovieData={searchMovieData}
+        >
+        </SearchList>
       </Container>
+
+      <container>
+        <Card>
+
+        </Card>
+      </container>
     </>
   );
 };

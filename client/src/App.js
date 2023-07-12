@@ -6,6 +6,7 @@ import SearchMovies from './pages/SearchMovies';
 import SavedMovies from './pages/SavedMovies';
 import Navbar from './components/Navbar';
 
+
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
   uri: '/graphql',

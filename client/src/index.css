@@ -2,6 +2,8 @@
   background-color: rgba(167, 170, 8, 0.925);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   
+  
+  
 }
 
 .nav-link {
@@ -15,17 +17,20 @@
   flex-direction: column;
 }
 
-.color-search {
+.color-search  {
 
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-transform: uppercase;
   color: rgb(243, 243, 243);
   display: flex;
   flex-direction: row;
+  margin-top: 162 px;
+  
+  
  
    background-image: linear-gradient(-225deg,
-      #062f6b 0%,
-      #2445b4 29%,
+      #011129 0%,
+      #2945a3 29%,
       #05536b 67%,
       #fff800 100%); 
      
@@ -51,11 +56,14 @@
   } 
 
   button.color-searchbutton {
+    
     background-color: rgba(167, 170, 8, 0.925);
-    
-    
+    cursor: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" height="25" width="25"><text y="25" font-size="32">🚀</text><path d="M0,2 L0,0 L2,0" fill="red" /></svg>'), auto;
   }
 
+
+  
+  
 
  
   
