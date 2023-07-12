@@ -46,8 +46,9 @@ const resolvers = {
             return { token, user };
           },
           saveMovie: async (parent, { input }, context) => {
+            let updatedUser;
             if (context.user) {
-              const updatedUser = await User.findOneAndUpdate(
+              updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
                 { $addToSet: { savedMovies: input } },
                 { new: true}
