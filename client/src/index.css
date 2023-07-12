@@ -1,8 +1,14 @@
 .color-nav {
   background-color: rgba(167, 170, 8, 0.925);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
+  
 }
+
+.nav-link {
+  color: rgb(243, 243, 243)
+}
+
+
 
 .style-logo {
   display: flex;
@@ -13,6 +19,9 @@
 
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-transform: uppercase;
+  color: rgb(243, 243, 243);
+  display: flex;
+  flex-direction: row;
  
    background-image: linear-gradient(-225deg,
       #062f6b 0%,
@@ -40,6 +49,12 @@
 
    
   } 
+
+  button.color-searchbutton {
+    background-color: rgba(167, 170, 8, 0.925);
+    
+    
+  }
 
 
  
