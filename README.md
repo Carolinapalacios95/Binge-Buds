@@ -39,22 +39,22 @@ You can view the live deployed application at Heroku by clicking the following l
 The following images display the web application's appearance, functionality, and responsiveness:
 
  Home Search Page
-![Homepage-Demo](./public/assets/homepage.PNG)
+![Homepage-Demo](/client/public/assets/homepage.png)
 
-Login
-![Login-Demo](./public/assets/login.PNG)
+Login/Signup
+![Login-Demo](/client/public/assets/login.png)
 
-Signup
-![Signup-Demo](./public/assets/signup.PNG)
+Search Movies
+![Search-Demo](/client/public/assets/search-movies.png)
 
 Saved Movies Page
-![Saved-Movies-Demo](./public/assets/saved.PNG)
+![Saved-Movies-Demo](/client/public/assets/saved.png)
 
 Tablet View
-![Homepage-Tablet](./public/assets/homepage-tablet.PNG)
+![Homepage-Tablet](/client/public/assets/tablet.png)
 
 Mobile View
-![Homepage-Mobile](./public/assets/homepage-mobile.PNG)
+![Homepage-Mobile](/client/public/assets/mobile.png)
 
 ## Installation
 

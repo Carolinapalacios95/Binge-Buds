@@ -35,12 +35,13 @@ border-style:outset;
 
 .style-navbarbrand {
   margin-bottom: -160px;
-  padding-left: 50px;
   margin-top: -184px;
   margin-left: -125px;
 }
 
-
+.pt-5 {
+  color: white;
+}
 
 .color-search  {
 
