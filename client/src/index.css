@@ -1,43 +1,162 @@
+#root {
+  background-image: linear-gradient(-225deg,
+  #011129 0%,
+  #212529 29%,
+  #682085 67%,
+  #b708ce 100%);
+margin-bottom: 100px;
+}
+
+.carousel .carousel-indicators button {
+  width: 20px;
+  height: 20 px;
+  border-radius: 50% ;
+}
+
+
 .color-nav {
-  background-color: rgba(167, 170, 8, 0.925);
+  background-color: #3d0444;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+border-style:outset;
+  
+}
+
+.nav-link {
+  color: rgb(243, 243, 243);
 
 }
 
-.style-logo {
-  display: flex;
-  flex-direction: column;
+.style-toggler {
+  background-color: #fff;
+  border: #3d0444;
 }
 
-.color-search {
+
+
+.style-navbarbrand {
+  margin-bottom: -160px;
+  margin-top: -184px;
+  margin-left: -125px;
+}
+
+.pt-5 {
+  color: white;
+}
+
+.color-search  {
 
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-transform: uppercase;
-   background-image: linear-gradient(-225deg,
-      #062f6b 0%,
-      #2445b4 29%,
-      #05536b 67%,
-      #fff800 100%); 
-  /* background-size: auto auto;
-  background-clip: border-box;
-  background-size: 200% auto;
+  color: rgb(243, 243, 243);
+  display: flex;
+  flex-direction: row;
+  margin-top: 162 px;
+  padding-top: 100px;
+  padding-bottom: 150px;
+  
+  
  
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: textclip 2s linear infinite;
-  display: inline-block;
-      font-size: 190px;
-} 
+   background-image: linear-gradient(-225deg,
+      #011129 0%,
+      #212529 29%,
+      #682085 67%,
+      #b708ce 100%); 
+     
+      
+   background-size: auto auto;
+  background-clip: border-box;
+  background-size: 100% auto;
+ 
+ 
 
-  /* @keyframes textclip {
+  
+  animation: textclip 8s linear infinite;
+  display:flexbox;
+      font-size: 190px;
+}  
+
+   @keyframes textclip {
     to {
       background-position: 200% center;
-    }
+    } 
 
-    */
-  } */
+   
+  } 
 
-  .color-searchbutton {
-    background-color: rgb(28, 83, 184);
+  button.color-searchbutton {
+    
+    background-color: rgba(167, 170, 8, 0.925);
+    cursor: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" height="25" width="25"><text y="25" font-size="32">🚀</text><path d="M0,2 L0,0 L2,0" fill="red" /></svg>'), auto;
   }
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: rgba(255, 255, 255, 0.925);
+    background-color: rgba(167, 170, 8, 0.925);
+  }
+
+  .btn {
+    border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+    border-radius: var(--bs-btn-border-radius);
+    background-color: rgb(81 2 92 / 93%);
+  }
+
+  .btn-success {
+    --bs-btn-bg: rgba(167, 170, 8, 0.925);
+    --bs-btn-border-color: rgba(49, 2, 92, 0.925);
+    --bs-btn-hover-bg: #531288;
+
+    --bs-btn-color: #fff;
+    --bs-btn-hover-bg: rgba(212, 209, 26, 0.925);
+    --bs-btn-hover-border-color: #7d5aaa;;
+    --bs-btn-focus-shadow-rgb: 60,153,110;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #471985;;
+    --bs-btn-active-border-color: #471985;;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: rgba(95, 95, 92, 0.925);
+    --bs-btn-disabled-border-color: rgba(95, 95, 92, 0.925);
+  }
+
+  .nav {
+    --bs-nav-link-padding-x: 1rem;
+    --bs-nav-link-padding-y: 0.5rem;
+    --bs-nav-link-font-weight: ;
+    --bs-nav-link-color: #510585;
+    --bs-nav-link-hover-color: #7f3bbe;
+    --bs-nav-link-disabled-color: var(--bs-secondary-color);
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.style-footer {
+  text-align: center;
+  margin-top: -50px ;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.btn-info {
+  --bs-btn-color: #fafafa;
+  --bs-btn-bg: #950df0;
+  --bs-btn-border-color: #c30df0;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #f231c5;
+  --bs-btn-hover-border-color: #f13af1;
+  --bs-btn-focus-shadow-rgb: 11,172,204;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #f33d3d;
+  --bs-btn-active-border-color: #da25f2;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #f00ddd;
+  --bs-btn-disabled-border-color: #0dcaf0;
+}
+
+  
+  
+
+ 
+  
