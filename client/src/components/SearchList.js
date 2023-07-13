@@ -75,7 +75,7 @@ const SearchList = ( {searchMovieData} ) => {
           </Row>
         )
     } else {
-        return <div>no results</div>
+        return <div></div>
     }
 }
 export default SearchList;

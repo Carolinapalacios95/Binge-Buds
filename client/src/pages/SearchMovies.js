@@ -129,11 +129,6 @@ const SearchMovies = () => {
         </SearchList>
       </Container>
 
-      <container>
-        <Card>
-
-        </Card>
-      </container>
     </>
   );
 };
