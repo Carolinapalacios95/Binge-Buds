@@ -92,7 +92,7 @@ const SavedMovies = () => {
                   {movie.image ? <Card.Img src={`https://image.tmdb.org/t/p/original${movie.image}`} alt={`The cover for ${movie.title}`} variant='top' /> : null}
                   <Card.Body>
                     <Card.Title>{movie.title}</Card.Title>
-                    <p className='small'>Authors: {movie.authors}</p>
+                    <p className='small'>Overview:</p>
                     <Card.Text>{movie.description}</Card.Text>
                     <Button className='btn-block btn-danger' onClick={() => handleDeleteMovie(movie.movieId)}>
                       Delete this Movie!
