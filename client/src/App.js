@@ -7,8 +7,8 @@ import SavedMovies from './pages/SavedMovies';
 import Navbar from './components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import Slider from '../src/components/Slider';
-// import slides from './data.json'
+import Slider from '../src/components/Slider';
+import slides from './utils/data.json'
 
 
 // Construct our main GraphQL API endpoint
@@ -37,8 +37,8 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-        {/* <Slider slides={slides}/>  */}
           <Navbar />
+          <Slider slides={slides}/> 
           <Routes>
             <Route 
               path='/' 
