@@ -5,6 +5,8 @@ import { setContext } from '@apollo/client/link/context';
 import SearchMovies from './pages/SearchMovies';
 import SavedMovies from './pages/SavedMovies';
 import Navbar from './components/Navbar';
+import BingeBudNote from './components/Notification'; 
+
 
 // Construct our main GraphQL API endpoint
 const httpLink = createHttpLink({
@@ -33,6 +35,7 @@ function App() {
       <Router>
         <>
           <Navbar />
+          <BingeBudNote />
           <Routes>
             <Route 
               path='/' 

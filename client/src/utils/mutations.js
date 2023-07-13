@@ -37,6 +37,12 @@ export const SAVE_MOVIE = gql`
         title
         image
       }
+      bingebuds {
+        username
+        email
+        movie
+      }
+
     }
   }
 `;
