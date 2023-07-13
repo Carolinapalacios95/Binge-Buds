@@ -21,7 +21,7 @@ const BingeBudNote = () => {
   }, [loading, data, lastSavedMovie]);
 
   const bingebuds = data?.me?.bingebuds || [];
-  const potentialBingebud = bingebuds[0]; // Get the first potential bingebud
+  const potentialBingebud = bingebuds[bingebuds.length - 1]; // Get the first potential bingebud
 
   console.log('bingebuds:', bingebuds);
   console.log('potentialBingebud:', potentialBingebud);

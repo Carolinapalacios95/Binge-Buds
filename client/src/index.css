@@ -155,8 +155,27 @@ border-style:outset;
   --bs-btn-disabled-border-color: #0dcaf0;
 }
 
-  
-  
+.notification-box {
+  position: relative;
+  z-index: 9999;
+  padding: 20px;
+  background-color: #2b0c42;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  /* Additional styling for the notification box */
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  /* Additional styling for the close button */
+}
+
 
  
   
