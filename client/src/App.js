@@ -5,7 +5,10 @@ import { setContext } from '@apollo/client/link/context';
 import SearchMovies from './pages/SearchMovies';
 import SavedMovies from './pages/SavedMovies';
 import Navbar from './components/Navbar';
-import BingeBudNote from './components/Notification'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// import Slider from '../src/components/Slider';
+// import slides from './data.json'
 
 
 // Construct our main GraphQL API endpoint
@@ -34,8 +37,8 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
+        {/* <Slider slides={slides}/>  */}
           <Navbar />
-          <BingeBudNote />
           <Routes>
             <Route 
               path='/' 
@@ -49,10 +52,15 @@ function App() {
               path='*'
               element={<h1 className='display-2'>Wrong page!</h1>}
             />
+           
           </Routes>
         </>
       </Router>
+
+
     </ApolloProvider> 
+
+  
   );
 }
 
