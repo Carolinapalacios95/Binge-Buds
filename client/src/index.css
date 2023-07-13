@@ -7,11 +7,34 @@
 margin-bottom: 100px;
 }
 
-.carousel .carousel-indicators button {
-  width: 20px;
-  height: 20 px;
-  border-radius: 50% ;
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin-right: 15%;
+  margin-bottom: 1rem;
+  margin-left: 15%;
 }
+
+.carousel-item-wrapper {
+  height: 400px; /* Set your desired height here */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+  .carousel-item-wrapper img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
 
 
 .color-nav {
@@ -26,6 +49,20 @@ border-style:outset;
 
 }
 
+.navbar-nav {
+  --bs-nav-link-padding-x: 0;
+  --bs-nav-link-padding-y: 0.5rem;
+  --bs-nav-link-font-weight: ;
+  --bs-nav-link-color: var(--bs-navbar-color);
+  --bs-nav-link-hover-color: rgba(201, 226, 57, 0.8);
+  --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
 .style-toggler {
   background-color: #fff;
   border: #3d0444;
@@ -35,8 +72,48 @@ border-style:outset;
 
 .style-navbarbrand {
   margin-bottom: -160px;
-  margin-top: -184px;
-  margin-left: -125px;
+  margin-top: -192px;
+}
+
+.style-logo {
+  /* height: auto;
+  width: 100%; */
+  padding-top: 10px; /* Adjust the padding-top as needed */
+  padding-bottom: 10px; /* Adjust the padding-bottom as needed */
+  display: flex;
+  justify-content: center;
+}
+
+img.style-logo {
+  height: 350px; /* Adjust the height as needed */
+  max-width: 100%;
+  margin-top: 5%; /* Adjust the margin-top as needed */
+  margin-bottom: 2%; /* Adjust the margin-bottom as needed */
+  object-fit: contain;
+}
+
+@media (min-width: 992px) {
+  /* Apply styles for desktop view */
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  img.style-logo {
+    height: 400px; /* Adjust the height as needed */
+    margin-left: -200px; /* Adjust the negative margin as needed */
+  }
+}
+
+@media (max-width: 991px) {
+  /* Apply styles for tablet and mobile view */
+ 
+
+  img.style-logo {
+    height: 450px; /* Adjust the height as needed */
+    margin-top: 10px; /* Adjust the margin-top as needed */
+    margin-bottom: -50px;
+  }
 }
 
 .pt-5 {
@@ -66,13 +143,14 @@ border-style:outset;
    background-size: auto auto;
   background-clip: border-box;
   background-size: 100% auto;
+
+  
+  
  
  
 
   
-  animation: textclip 8s linear infinite;
-  display:flexbox;
-      font-size: 190px;
+ 
 }  
 
    @keyframes textclip {
@@ -86,7 +164,7 @@ border-style:outset;
   button.color-searchbutton {
     
     background-color: rgba(167, 170, 8, 0.925);
-    cursor: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" height="25" width="25"><text y="25" font-size="32">🚀</text><path d="M0,2 L0,0 L2,0" fill="red" /></svg>'), auto;
+    
   }
 
   .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
@@ -95,7 +173,7 @@ border-style:outset;
   }
 
   .btn {
-    border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+    border: rgb(81 2 92 / 93%);
     border-radius: var(--bs-btn-border-radius);
     background-color: rgb(81 2 92 / 93%);
   }
@@ -116,6 +194,11 @@ border-style:outset;
     --bs-btn-disabled-color: #fff;
     --bs-btn-disabled-bg: rgba(95, 95, 92, 0.925);
     --bs-btn-disabled-border-color: rgba(95, 95, 92, 0.925);
+    
+  }
+
+  [type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" height="25" width="25"><text y="25" font-size="32">🚀</text><path d="M0,2 L0,0 L2,0" fill="red" /></svg>'), auto;
   }
 
   .nav {
@@ -179,3 +262,6 @@ border-style:outset;
 
  
   
+
+
+

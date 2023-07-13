@@ -15,7 +15,7 @@ const AppNavbar = () => {
       <Navbar className="color-nav" variant="light" expand="lg" expanded={expanded}>
         <Container fluid>
           <Navbar.Brand className="style-navbarbrand" as={Link} to="/">
-            <img className="style-logo" src="../bblogodesign.png" alt="logo" style={{ height: '500px', width: '500px' }} />
+            <img className="style-logo" src="../bblogodesign.png" alt="logo"  />
           </Navbar.Brand>
           <Navbar.Toggle className="style-toggler" aria-controls="navbar" onClick={handleToggle} />
           <Navbar.Collapse id="navbar" className="justify-content-end">
