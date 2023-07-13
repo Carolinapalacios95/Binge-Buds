@@ -50,6 +50,9 @@ Search Movies
 Saved Movies Page
 ![Saved-Movies-Demo](/client/public/assets/saved.png)
 
+BingBuds Match Feature
+![Match-Demo](/client/public/assets/match.png)
+
 Tablet View
 ![Homepage-Tablet](/client/public/assets/tablet.png)
 
