@@ -5,6 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import SearchMovies from './pages/SearchMovies';
 import SavedMovies from './pages/SavedMovies';
 import Navbar from './components/Navbar';
+import BingeBudNote from './components/Notification';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Slider from '../src/components/Slider';
@@ -38,6 +39,8 @@ function App() {
       <Router>
         <>
           <Navbar />
+
+          <BingeBudNote /> 
           <Slider slides={slides}/> 
           <Routes>
             <Route 

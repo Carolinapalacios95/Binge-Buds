@@ -8,6 +8,13 @@ type User {
   password: String
   movieCount: Int
   savedMovies: [Movie]
+  bingebuds: [BingeBud]
+}
+
+type BingeBud {
+  username: String!
+  email: String!
+  movie: String!
 }
 
 type Movie {

@@ -13,6 +13,11 @@ export const GET_ME = gql`
         title
         image
       }
+      bingebuds{
+        username
+        email
+        movie
+      }
     }
   }
 `;
